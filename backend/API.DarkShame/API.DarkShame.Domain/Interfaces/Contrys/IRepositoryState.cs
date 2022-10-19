@@ -11,6 +11,6 @@ namespace API.DarkShame.Domain.Interfaces.Contrys
     {
         Task<List<State>> GetState();
         Task<State> GetStateById(int idState);
-        Task PostState(List<State> state);
+        Task PostState(State state);
     }
 }

@@ -27,9 +27,13 @@ namespace API.DarkShame.Infra.Repository.Contrys
             return stateId;
         }
 
-        public async Task PostState(List<State> state)
+        public async Task PostState(State state)
         {
-            await _context.State.InsertManyAsync(state);
+            var contry = _context.Contry.Find(x => x.ContryId == state.ContryId).FirstOrDefault();
+            if (contry != null)
+            {
+                await _context.State.InsertOneAsync(state);
+            }
         }
     }
 }

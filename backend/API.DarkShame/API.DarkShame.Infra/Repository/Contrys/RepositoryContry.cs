@@ -33,9 +33,9 @@ namespace API.DarkShame.Infra.Repository.Contrys
             return contryId;
         }
 
-        public async Task PostContry(List<Contry> contry)
+        public async Task PostContry(Contry contry)
         {
-            await _context.Contry.InsertManyAsync(contry);
+            await _context.Contry.InsertOneAsync(contry);
         }
     }
 }

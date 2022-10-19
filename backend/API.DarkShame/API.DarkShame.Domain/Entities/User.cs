@@ -54,16 +54,28 @@ namespace API.DarkShame.Domain.Entities
         public DateTime joinDate { get; set; }
 
         [BsonElement("locationContry")]
+        [BsonRepresentation(BsonType.Int32)]
+        public int locationContry { get; set; }
+
+        [BsonElement("locationContryName")]
         [BsonRepresentation(BsonType.String)]
-        public string locationContry { get; set; }
+        public string locationContryName { get; set; }
 
         [BsonElement("locationState")]
+        [BsonRepresentation(BsonType.Int32)]
+        public int locationState { get; set; }
+
+        [BsonElement("locationStateName")]
         [BsonRepresentation(BsonType.String)]
-        public string locationState { get; set; }
+        public string locationStateName { get; set; }
 
         [BsonElement("locationCity")]
         [BsonRepresentation(BsonType.Int32)]
-        public string locationCity { get; set; }
+        public int locationCity { get; set; }
+
+        [BsonElement("locationCityName")]
+        [BsonRepresentation(BsonType.String)]
+        public string locationCityName { get; set; }
 
         [BsonElement("summary")]
         [BsonRepresentation(BsonType.String)]

@@ -11,6 +11,6 @@ namespace API.DarkShame.Domain.Interfaces.Contrys
     {
         Task<List<City>> GetCity();
         Task<City> GetCityById(int idCity);
-        Task PostCity(List<City> City);
+        Task PostCity(City City);
     }
 }

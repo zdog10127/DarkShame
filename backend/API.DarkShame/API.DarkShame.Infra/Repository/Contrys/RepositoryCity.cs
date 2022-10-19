@@ -32,9 +32,13 @@ namespace API.DarkShame.Infra.Repository.Contrys
             return cityId;
         }
 
-        public async Task PostCity(List<City> city)
+        public async Task PostCity(City city)
         {
-            await _context.City.InsertManyAsync(city);
+            var contry = _context.State.Find(x => x.StateId == city.StateId).FirstOrDefault();
+            if (contry != null)
+            {
+                await _context.City.InsertOneAsync(city);
+            }
         }
     }
 }

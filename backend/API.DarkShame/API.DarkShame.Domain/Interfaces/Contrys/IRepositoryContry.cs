@@ -11,6 +11,6 @@ namespace API.DarkShame.Domain.Interfaces.Contrys
     {
         Task<List<Contry>> GetContry();
         Task<Contry> GetContryById(int idContry);
-        Task PostContry(List<Contry> contry);
+        Task PostContry(Contry contry);
     }
 }

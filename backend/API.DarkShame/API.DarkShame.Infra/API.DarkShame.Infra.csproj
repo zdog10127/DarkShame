@@ -7,8 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Context\" />
-    <Folder Include="Repository\" />
+    <PackageReference Include="MongoDB.Driver" Version="2.18.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\API.DarkShame.Domain\API.DarkShame.Domain.csproj" />
+    <ProjectReference Include="..\API.DarkShame.Utility\API.DarkShame.Utility.csproj" />
   </ItemGroup>
 
 </Project>

@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\API.DarkShame.Domain\API.DarkShame.Domain.csproj" />
+    <ProjectReference Include="..\API.DarkShame.Infra\API.DarkShame.Infra.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,15 +1,16 @@
-﻿using MongoDB.Bson;
+﻿using API.DarkShame.Domain.Entities;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.IdGenerators;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace API.DarkShame.Domain.Entities
+namespace API.DarkShame.Domain.Dto.Request
 {
-    public class User
+    public class UserRequestDto
     {
         [BsonId(IdGenerator = typeof(StringObjectIdGenerator))]
         [BsonRepresentation(BsonType.ObjectId)]
@@ -25,10 +26,6 @@ namespace API.DarkShame.Domain.Entities
         [BsonElement("nickName")]
         [BsonRepresentation(BsonType.String)]
         public string NickName { get; set; }
-
-        [BsonElement("lastLogoff")]
-        [BsonRepresentation(BsonType.DateTime)]
-        public DateTime LastLogoff { get; set; }
 
         [BsonElement("profileUrl")]
         [BsonRepresentation(BsonType.String)]
@@ -49,10 +46,6 @@ namespace API.DarkShame.Domain.Entities
         [BsonRepresentation(BsonType.String)]
         public string PrimaryGroupId { get; set; }
 
-        [BsonElement("joinDate")]
-        [BsonRepresentation(BsonType.DateTime)]
-        public DateTime joinDate { get; set; }
-
         [BsonElement("locationContry")]
         [BsonRepresentation(BsonType.Int32)]
         public int locationContry { get; set; }
@@ -69,7 +62,7 @@ namespace API.DarkShame.Domain.Entities
         [BsonRepresentation(BsonType.String)]
         public string locationStateName { get; set; }
 
-        [BsonElement("locationCity")]
+        [BsonElement("locationCityId")]
         [BsonRepresentation(BsonType.Int32)]
         public int locationCity { get; set; }
 

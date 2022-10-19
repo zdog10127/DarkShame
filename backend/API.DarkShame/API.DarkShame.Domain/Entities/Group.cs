@@ -13,7 +13,7 @@ namespace API.DarkShame.Domain.Entities
     {
         [BsonId(IdGenerator = typeof(StringObjectIdGenerator))]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+        public string Id { get; set; } = ObjectId.GenerateNewId().ToString();
 
         [BsonElement("inviteOnly")]
         [BsonRepresentation(BsonType.Boolean)]

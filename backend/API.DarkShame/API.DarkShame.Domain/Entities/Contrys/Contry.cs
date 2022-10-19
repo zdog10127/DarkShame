@@ -7,20 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace API.DarkShame.Domain.Entities
+namespace API.DarkShame.Domain.Entities.Contrys
 {
-    public class Friend
+    public class Contry
     {
         [BsonId(IdGenerator = typeof(StringObjectIdGenerator))]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; } = ObjectId.GenerateNewId().ToString();
 
-        [BsonElement("blocked")]
-        [BsonRepresentation(BsonType.Boolean)]
-        public bool Blocked { get; set; }
+        [BsonElement("contryId")]
+        [BsonRepresentation(BsonType.Int32)]
+        public int ContryId { get; set; }
 
-        [BsonElement("friendSince")]
-        [BsonRepresentation(BsonType.DateTime)]
-        public DateTime FriendSince { get; set; }
+        [BsonElement("nameContry")]
+        [BsonRepresentation(BsonType.String)]
+        public string NameContry { get; set; }
     }
 }

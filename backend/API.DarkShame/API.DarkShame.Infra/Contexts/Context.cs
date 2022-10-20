@@ -1,4 +1,4 @@
-﻿using API.DarkShame.Domain.Dto.Request;
+﻿using API.DarkShame.Domain.Dto.Request.Users;
 using API.DarkShame.Domain.Entities;
 using API.DarkShame.Domain.Entities.Contrys;
 using API.DarkShame.Domain.Interfaces;
@@ -23,6 +23,12 @@ namespace API.DarkShame.Infra.Contexts
         public IMongoCollection<State> State { get; }
         public IMongoCollection<City> City { get; }
 
+        //Group
+        public IMongoCollection<GroupInfo> GroupInfo { get; }
+
+        //Server
+        public IMongoCollection<ServerInfo> ServerInfo { get; }
+
         public Context()
         {
             var client = new MongoClient(ApplicationSettings.GetStringMongoConnection());
@@ -36,6 +42,12 @@ namespace API.DarkShame.Infra.Contexts
             Contry = dataBase.GetCollection<Contry>("contry");
             State = dataBase.GetCollection<State>("state");
             City = dataBase.GetCollection<City>("city");
+
+            //Group
+            GroupInfo = dataBase.GetCollection<GroupInfo>("groups");
+
+            //Server
+            ServerInfo = dataBase.GetCollection<ServerInfo>("server");
         }
     }
 }

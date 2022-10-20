@@ -2,7 +2,7 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.IdGenerators;
 
-namespace API.DarkShame.Domain.Dto.Request
+namespace API.DarkShame.Domain.Dto.Request.Users
 {
     public class UserLastLogOffRequestDto
     {

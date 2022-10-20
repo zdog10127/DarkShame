@@ -1,23 +1,23 @@
-﻿using API.DarkShame.Domain.Entities;
-using API.DarkShame.Domain.Entities.Contrys;
-using API.DarkShame.Domain.Interfaces;
-using API.DarkShame.Domain.Interfaces.Contrys;
+﻿using API.DarkShame.Domain.Dto.Request;
+using API.DarkShame.Domain.Entities;
+using API.DarkShame.Domain.Interfaces.Groups;
+using API.DarkShame.Domain.Interfaces.Server;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Text;
 
-namespace API.DarkShame.Controllers.Contrys
+namespace API.DarkShame.Controllers.Server
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ContryController : ControllerBase
+    public class ServerInfoController : ControllerBase
     {
-        private readonly IServiceContry _serviceContry;
+        private readonly IServiceServerInfo _serviceServerInfo;
 
-        public ContryController(IServiceContry serviceContry)
+        public ServerInfoController(IServiceServerInfo serviceServerInfo)
         {
-            _serviceContry = serviceContry;
+            _serviceServerInfo = serviceServerInfo;
         }
 
         [HttpGet]
@@ -34,16 +34,16 @@ namespace API.DarkShame.Controllers.Contrys
         }
 
         [HttpGet]
-        [Route("/Contrys")]
-        [ProducesResponseType(typeof(Contry), StatusCodes.Status200OK)]
+        [Route("/ServerStatus")]
+        [ProducesResponseType(typeof (ServerInfo),StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetContrys()
+        public async Task<IActionResult> ServerStatus()
         {
-            var contrys = await _serviceContry.GetContry();
+            var server = await _serviceServerInfo.ServerStatus();
 
-            if (contrys.Count == 0)
+            if (server is null)
             {
                 ProblemDetails detalhesDoProblema = new ProblemDetails();
                 detalhesDoProblema.Status = StatusCodes.Status404NotFound;
@@ -54,50 +54,25 @@ namespace API.DarkShame.Controllers.Contrys
                 return NotFound(detalhesDoProblema);
             }
 
-            return Ok(contrys);
+            return Ok(server);
         }
-
-        [HttpGet]
-        [Route("/Contrys/{idContry}")]
-        [ProducesResponseType(typeof(Contry), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetContryById(int idContry)
-        {
-            var contryId = await _serviceContry.GetContryById(idContry);
-
-            if (contryId is null)
-            {
-                ProblemDetails detalhesDoProblema = new ProblemDetails();
-                detalhesDoProblema.Status = StatusCodes.Status404NotFound;
-                detalhesDoProblema.Type = "NotFound";
-                detalhesDoProblema.Title = "Registro não Encontrado";
-                detalhesDoProblema.Detail = $"Não foram encontrados registros. ";
-                detalhesDoProblema.Instance = HttpContext.Request.Path;
-                return NotFound(detalhesDoProblema);
-            }
-
-            return Ok(contryId);
-        }
-
 
         [HttpPost]
-        [Route("/Contrys")]
+        [Route("/ServerStatus")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> PostUser([FromBody] List<Contry> contry)
+        public async Task<IActionResult> CreateStatusServer([FromBody] ServerInfo serverInfo)
         {
-            if (contry != null)
+            if (serverInfo != null)
             {
-                var returnDto = await _serviceContry.PostContry(contry);
+                var returnDto = await _serviceServerInfo.CreateStatusServer(serverInfo);
 
                 if (returnDto.ThereError == true)
                     return returnDto.ReturnResult(HttpContext.Request.Path);
                 else
                 {
-                    return StatusCode((int)HttpStatusCode.Created, contry);
+                    return StatusCode((int)HttpStatusCode.Created, serverInfo);
                 }
             }
             else
@@ -110,6 +85,24 @@ namespace API.DarkShame.Controllers.Contrys
                 detalhesDoProblema.Instance = HttpContext.Request.Path;
                 return BadRequest(detalhesDoProblema);
             }
+        }
+
+        [HttpPut]
+        [Route("/Server/{idServer}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> UpdateStatusServer([FromBody] ServerInfo serverInfo)
+        {
+            var returnDto = await _serviceServerInfo.UpdateStatusServer(serverInfo);
+
+            if (returnDto.ThereError == true)
+                return returnDto.ReturnResult(HttpContext.Request.Path);
+            else
+            {
+                return StatusCode((int)HttpStatusCode.OK, serverInfo);
+            }
+
         }
     }
 }

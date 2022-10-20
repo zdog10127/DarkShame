@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace API.DarkShame.Domain.Entities
 {
-    public class Store
+    public enum LoginStatus
     {
-
+        LoginFailed,
+        LoginSuccess,
+        SteamGuard
     }
 }

@@ -1,7 +1,11 @@
-using API.DarkShame.Domain.Interfaces;
 using API.DarkShame.Domain.Interfaces.Contrys;
-using API.DarkShame.Services;
+using API.DarkShame.Domain.Interfaces.Groups;
+using API.DarkShame.Domain.Interfaces.Server;
+using API.DarkShame.Domain.Interfaces.Users;
 using API.DarkShame.Services.Contrys;
+using API.DarkShame.Services.Groups;
+using API.DarkShame.Services.Server;
+using API.DarkShame.Services.Users;
 using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +24,12 @@ builder.Services.AddScoped<IServiceUser, ServiceUser>();
 builder.Services.AddScoped<IServiceContry, ServiceContry>();
 builder.Services.AddScoped<IServiceState, ServiceState>();
 builder.Services.AddScoped<IServiceCity, ServiceCity>();
+
+//Groups
+builder.Services.AddScoped<IServiceGroupInfo, ServiceGroupInfo>();
+
+//Server
+builder.Services.AddScoped<IServiceServerInfo, ServiceServerInfo>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

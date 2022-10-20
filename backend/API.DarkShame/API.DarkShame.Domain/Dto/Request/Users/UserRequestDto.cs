@@ -2,13 +2,8 @@
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.IdGenerators;
 using MongoDB.Bson;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace API.DarkShame.Domain.Dto.Request
+namespace API.DarkShame.Domain.Dto.Request.Users
 {
     public class UserRequestDto
     {
@@ -48,27 +43,15 @@ namespace API.DarkShame.Domain.Dto.Request
 
         [BsonElement("locationContry")]
         [BsonRepresentation(BsonType.Int32)]
-        public int locationContry { get; set; }
-
-        [BsonElement("locationContryName")]
-        [BsonRepresentation(BsonType.String)]
-        public string locationContryName { get; set; }
+        public int LocationContry { get; set; }
 
         [BsonElement("locationState")]
         [BsonRepresentation(BsonType.Int32)]
-        public int locationState { get; set; }
-
-        [BsonElement("locationStateName")]
-        [BsonRepresentation(BsonType.String)]
-        public string locationStateName { get; set; }
+        public int LocationState { get; set; }
 
         [BsonElement("locationCityId")]
         [BsonRepresentation(BsonType.Int32)]
-        public int locationCity { get; set; }
-
-        [BsonElement("locationCityName")]
-        [BsonRepresentation(BsonType.String)]
-        public string locationCityName { get; set; }
+        public int LocationCity { get; set; }
 
         [BsonElement("summary")]
         [BsonRepresentation(BsonType.String)]

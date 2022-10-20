@@ -1,15 +1,10 @@
-﻿using API.DarkShame.Domain.Dto.Request;
+﻿using API.DarkShame.Domain.Dto.Request.Users;
 using API.DarkShame.Domain.Dto.Response;
 using API.DarkShame.Domain.Entities;
-using API.DarkShame.Domain.Interfaces;
-using API.DarkShame.Infra.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using API.DarkShame.Domain.Interfaces.Users;
+using API.DarkShame.Infra.Repository.Users;
 
-namespace API.DarkShame.Services
+namespace API.DarkShame.Services.Users
 {
     public class ServiceUser : IServiceUser
     {

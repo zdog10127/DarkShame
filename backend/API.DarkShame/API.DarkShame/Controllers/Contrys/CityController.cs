@@ -1,4 +1,5 @@
-﻿using API.DarkShame.Domain.Entities.Contrys;
+﻿using API.DarkShame.Domain.Entities;
+using API.DarkShame.Domain.Entities.Contrys;
 using API.DarkShame.Domain.Interfaces.Contrys;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -33,7 +34,7 @@ namespace API.DarkShame.Controllers.Contrys
 
         [HttpGet]
         [Route("/Citys")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(City), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -57,7 +58,7 @@ namespace API.DarkShame.Controllers.Contrys
 
         [HttpGet]
         [Route("/Citys/{idCity}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(City), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]

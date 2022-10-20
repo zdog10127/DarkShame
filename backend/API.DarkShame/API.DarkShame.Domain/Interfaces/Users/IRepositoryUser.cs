@@ -1,4 +1,4 @@
-﻿using API.DarkShame.Domain.Dto.Request;
+﻿using API.DarkShame.Domain.Dto.Request.Users;
 using API.DarkShame.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace API.DarkShame.Domain.Interfaces
+namespace API.DarkShame.Domain.Interfaces.Users
 {
     public interface IRepositoryUser
     {

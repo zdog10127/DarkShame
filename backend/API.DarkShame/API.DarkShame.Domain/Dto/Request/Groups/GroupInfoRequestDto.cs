@@ -1,23 +1,19 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
+﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.IdGenerators;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace API.DarkShame.Domain.Entities
+namespace API.DarkShame.Domain.Dto.Request.Groups
 {
-    public class GroupInfo
+    public class GroupInfoRequestDto
     {
         [BsonId(IdGenerator = typeof(StringObjectIdGenerator))]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; } = ObjectId.GenerateNewId().ToString();
-
-        [BsonElement("creationDate")]
-        [BsonRepresentation(BsonType.DateTime)]
-        public DateTime creationDate { get; set; }
 
         [BsonElement("name")]
         [BsonRepresentation(BsonType.String)]
@@ -44,11 +40,11 @@ namespace API.DarkShame.Domain.Entities
         public string AvatarUrl { get; set; }
 
         [BsonElement("locationContry")]
-        [BsonRepresentation(BsonType.Int32)]
+        [BsonRepresentation(BsonType.String)]
         public int LocationContry { get; set; }
 
         [BsonElement("locationState")]
-        [BsonRepresentation(BsonType.Int32)]
+        [BsonRepresentation(BsonType.String)]
         public int LocationState { get; set; }
 
         [BsonElement("locationCity")]

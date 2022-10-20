@@ -1,5 +1,4 @@
-﻿using API.DarkShame.Domain.Dto.Request.Users;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +11,7 @@ namespace API.DarkShame.Domain.Interfaces
     {
         //Users
         IMongoCollection<Entities.User> Users { get; }
-        IMongoCollection<UserLastLogOffRequestDto> UserLastLogOff { get; }
+        IMongoCollection<Dto.Request.Users.UserLastLogOffRequestDto> UserLastLogOff { get; }
         
         //Contry - State - City
         IMongoCollection<Entities.Contrys.Contry> Contry { get; }
@@ -24,5 +23,15 @@ namespace API.DarkShame.Domain.Interfaces
 
         //Server
         IMongoCollection<Entities.ServerInfo> ServerInfo { get; }
+
+        //Games
+        IMongoCollection<Entities.Store.Game.Games> Games { get; }
+        IMongoCollection<Dto.Request.Store.Game.GamesRequestDto> GamesDto { get; }
+        IMongoCollection<Entities.Store.Game.Analysis> Analysis { get; }
+        IMongoCollection<Entities.Store.Game.Languages> Languages { get; }
+        IMongoCollection<Entities.Store.Game.Resources> Resources { get; }
+        IMongoCollection<Entities.Store.Game.SpecificationsMinimum> SpecificationsMinimum { get; }
+        IMongoCollection<Entities.Store.Game.SpecificationsMaximum> SpecificationsMaximum { get; }
+
     }
 }

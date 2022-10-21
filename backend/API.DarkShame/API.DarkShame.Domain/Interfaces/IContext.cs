@@ -33,5 +33,8 @@ namespace API.DarkShame.Domain.Interfaces
         IMongoCollection<Entities.Store.Game.SpecificationsMinimum> SpecificationsMinimum { get; }
         IMongoCollection<Entities.Store.Game.SpecificationsMaximum> SpecificationsMaximum { get; }
 
+        //Payments
+        IMongoCollection<Entities.Store.Payment.Payments> Payments { get; }
+
     }
 }

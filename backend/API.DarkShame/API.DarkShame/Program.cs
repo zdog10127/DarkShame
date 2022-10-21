@@ -1,5 +1,6 @@
 using API.DarkShame.Domain.Interfaces.Contrys;
 using API.DarkShame.Domain.Interfaces.Groups;
+using API.DarkShame.Domain.Interfaces.Payment;
 using API.DarkShame.Domain.Interfaces.Server;
 using API.DarkShame.Domain.Interfaces.Store.Game;
 using API.DarkShame.Domain.Interfaces.Users;
@@ -7,6 +8,7 @@ using API.DarkShame.Services.Contrys;
 using API.DarkShame.Services.Groups;
 using API.DarkShame.Services.Server;
 using API.DarkShame.Services.Store.Game;
+using API.DarkShame.Services.Store.Payment;
 using API.DarkShame.Services.Users;
 using System.Globalization;
 
@@ -39,6 +41,9 @@ builder.Services.AddScoped<IServiceAnalysis, ServiceAnalysis>();
 builder.Services.AddScoped<IServiceLanguage, ServiceLanguage>();
 builder.Services.AddScoped<IServiceResources, ServiceResources>();
 builder.Services.AddScoped<IServiceSpecifications, ServiceSpecifications>();
+
+//Payments
+builder.Services.AddScoped<IServicePayments, ServicePayments>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

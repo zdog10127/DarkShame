@@ -11,7 +11,8 @@ namespace API.DarkShame.Domain.Interfaces.Store.Game
     public interface IServiceAnalysis
     {
         Task<List<Analysis>> GetAnalysisByIdGame(string idGame);
-        Task<Analysis> GetAnalysisByName(string nickName);
+        Task<List<Analysis>> GetAnalysisByName(string nickName);
+        Task<Analysis> GetAnalysisById(string id);
         Task<ReturnDto> CreateAnalysis(Analysis analysis);
         Task<ReturnDto> UpdateAnalysis(Analysis analysis, string idGame);
         Task<ReturnDto> DeleteAnalysis(string id);

@@ -26,15 +26,25 @@ namespace API.DarkShame.Infra.Repository.Store.Game
             return analysis.ToList();
         }
 
-        public async Task<Analysis> GetAnalysisByName(string nickName)
+        public async Task<List<Analysis>> GetAnalysisByName(string nickName)
         {
-            var nick = await _context.Analysis.Find(x => x.NickName == nickName).FirstOrDefaultAsync();
-            return nick;
+            var nick = await _context.Analysis.FindAsync(x => x.NickName == nickName);
+            return nick.ToList();
+        }
+
+        public async Task<Analysis> GetAnalysisById(string id)
+        {
+            var analysisId = await _context.Analysis.Find(x => x.Id == id).FirstOrDefaultAsync();
+            return analysisId;
         }
 
         public async Task CreateAnalysis(Analysis analysis)
         {
-            await _context.Analysis.InsertOneAsync(analysis);
+            var nickName = _context.Users.Find(x => x.NickName == analysis.NickName).FirstOrDefault();
+            if (nickName != null)
+            {
+                await _context.Analysis.InsertOneAsync(analysis);
+            }
         }
 
         public async Task UpdateAnalysis(Analysis analysis, string idGame)

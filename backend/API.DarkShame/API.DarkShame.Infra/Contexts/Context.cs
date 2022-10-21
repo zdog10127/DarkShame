@@ -3,6 +3,7 @@ using API.DarkShame.Domain.Dto.Request.Users;
 using API.DarkShame.Domain.Entities;
 using API.DarkShame.Domain.Entities.Contrys;
 using API.DarkShame.Domain.Entities.Store.Game;
+using API.DarkShame.Domain.Entities.Store.Payment;
 using API.DarkShame.Domain.Interfaces;
 using API.DarkShame.Utility;
 using MongoDB.Driver;
@@ -40,6 +41,9 @@ namespace API.DarkShame.Infra.Contexts
         public IMongoCollection<SpecificationsMinimum> SpecificationsMinimum { get; }
         public IMongoCollection<SpecificationsMaximum> SpecificationsMaximum { get; }
 
+        //Payments
+        public IMongoCollection<Payments> Payments { get; }
+
         public Context()
         {
             var client = new MongoClient(ApplicationSettings.GetStringMongoConnection());
@@ -68,6 +72,9 @@ namespace API.DarkShame.Infra.Contexts
             Resources = dataBase.GetCollection<Resources>("resources");
             SpecificationsMinimum = dataBase.GetCollection<SpecificationsMinimum>("specificationsMinimum");
             SpecificationsMaximum = dataBase.GetCollection<SpecificationsMaximum>("specificationsMaximum");
+
+            //Payments
+            Payments = dataBase.GetCollection<Payments>("payments");
         }
     }
 }

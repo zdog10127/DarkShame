@@ -10,10 +10,18 @@ namespace API.DarkShame.Services.Store.Game
     public class ServiceGames : IServiceGames
     {
         private readonly IRepositoryGames _repositoryGames;
+        private readonly IRepositoryAnalysis _repositoryAnalysis;
+        private readonly IRepositoryLanguage _repositoryLanguage;
+        private readonly IRepositoryResources _repositoryResources;
+        private readonly IRepositorySpecifications _repositorySpecifications;
 
         public ServiceGames()
         {
             _repositoryGames = new RepositoryGame();
+            _repositoryAnalysis = new RepositoryAnalysis();
+            _repositoryLanguage = new RepositoryLanguage();
+            _repositoryResources = new RepositoryResources();
+            _repositorySpecifications = new RepositorySpecifications();
         }
 
         public async Task<List<Games>> GetGames()
@@ -49,15 +57,7 @@ namespace API.DarkShame.Services.Store.Game
         {
             ReturnDto returnDto = new ReturnDto();
 
-            var ret = _repositoryGames.UpdateGame(games);
-
-            if (ret.Exception != null)
-            {
-                returnDto.ThereError = true;
-                returnDto.CodeError = "400";
-                returnDto.TitleError = "Atualizar o Jogo";
-                returnDto.MessageError = "Erro no processo de atualizar o Jogo";
-            }
+            returnDto = await UpdateGameAndItens(games);
 
             return await Task.FromResult(returnDto);
         }
@@ -77,6 +77,96 @@ namespace API.DarkShame.Services.Store.Game
             }
 
             return await Task.FromResult(returnDto);
+        }
+
+
+        private async Task<ReturnDto> UpdateGameAndItens(Games games)
+        {
+            ReturnDto returnDto = new ReturnDto();
+
+            try
+            {
+                var retGames = _repositoryGames.UpdateGame(games);
+
+                if (retGames.Exception != null)
+                {
+                    returnDto.ThereError = true;
+                    returnDto.CodeError = "500";
+                    returnDto.TitleError = "Atualização do Jogo";
+                    returnDto.MessageError = "Erro no processo de atualização dos dados";
+                }
+
+                if (games.Analysis != null)
+                {
+                    foreach (var item in games.Analysis)
+                    {
+                        var validate = new ServiceAnalysis();
+                        returnDto = await validate.CreateAnalysis(item);
+                        
+                        if (returnDto.ThereError == true)
+                        {
+                            return await Task.FromResult(returnDto);
+                        }
+                    }
+                }
+
+                if (games.Languages != null)
+                {
+                    foreach (var item in games.Languages)
+                    {
+                        var validate = new ServiceLanguage();
+                        returnDto = await validate.CreateLanguages(item);
+
+                        if (returnDto.ThereError == true)
+                        {
+                            return await Task.FromResult(returnDto);
+                        }
+                    }
+                }
+
+                if (games.Resources != null)
+                {
+                    var validate = new ServiceResources();
+                    returnDto = await validate.CreateResources(games.Resources);
+
+                    if (returnDto.ThereError == true)
+                    {
+                        return await Task.FromResult(returnDto);
+                    }
+                }
+
+                if (games.SpecificationsMinimum != null)
+                {
+                    var validate = new ServiceSpecifications();
+                    returnDto = await validate.CreateSpecificationsMinimum(games.SpecificationsMinimum);
+
+                    if (returnDto.ThereError == true)
+                    {
+                        return await Task.FromResult(returnDto);
+                    }
+                }
+
+                if (games.SpecificationsMaximum != null)
+                {
+                    var validate = new ServiceSpecifications();
+                    returnDto = await validate.CreateSpecificationsMaximum(games.SpecificationsMaximum);
+
+                    if (returnDto.ThereError == true)
+                    {
+                        return await Task.FromResult(returnDto);
+                    }
+                }
+
+                return await Task.FromResult(returnDto);
+            }
+            catch (Exception ex)
+            {
+                returnDto.ThereError = true;
+                returnDto.CodeError = "500";
+                returnDto.TitleError = "Exception - Games";
+                returnDto.MessageError = $"{ex.Message}{Environment.NewLine}{ex.StackTrace}";
+                return returnDto;
+            }
         }
     }
 }

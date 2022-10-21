@@ -15,4 +15,8 @@
     <ProjectReference Include="..\API.DarkShame.Services\API.DarkShame.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\Store\Payment\" />
+  </ItemGroup>
+
 </Project>

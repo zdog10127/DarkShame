@@ -16,7 +16,7 @@ namespace API.DarkShame.Domain.Entities.Store.Game
         public string Id { get; set; } = ObjectId.GenerateNewId().ToString();
 
         [BsonElement("idGame")]
-        [BsonRepresentation(BsonType.String)]
+        [BsonRepresentation(BsonType.ObjectId)]
         public string IdGame { get; set; }
 
         [BsonElement("so")]

@@ -25,10 +25,16 @@ namespace API.DarkShame.Services.Store.Game
             return analysis;
         }
 
-        public async Task<Analysis> GetAnalysisByName(string nickName)
+        public async Task<List<Analysis>> GetAnalysisByName(string nickName)
         {
             var nick = await _repositoryAnalysis.GetAnalysisByName(nickName);
             return nick;
+        }
+
+        public async Task<Analysis> GetAnalysisById(string id)
+        {
+            var analysisId = await _repositoryAnalysis.GetAnalysisById(id);
+            return analysisId;
         }
 
         public async Task<ReturnDto> CreateAnalysis(Analysis analysis)
